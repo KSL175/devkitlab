@@ -3,7 +3,7 @@ export const siteConfig = {
   name: 'DevKit Lab',
   tagline: 'Ten developer utilities. One tab. Zero servers.',
   description:
-    'A fast, private, browser-based suite of developer tools: JSON formatter, Base64, URL encoder, regex tester, UUID generator, password generator, JWT decoder, diff checker, timestamp converter, and minifier. No sign-up. No uploads. Everything runs locally.',
+  'Ten browser-based developer utilities: JSON formatter, regex tester, JWT decoder, password generator, and more. No sign-up. No uploads. All local.',
   url: 'https://devkitlab.dev',
   ogImage: 'https://devkitlab.dev/og.png',
   author: 'DevKit Lab',
