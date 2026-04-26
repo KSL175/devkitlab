@@ -56,11 +56,6 @@ export function buildBreadcrumbSchema(toolId: string) {
       {
         '@type': 'ListItem',
         position: 2,
-        name: tool.category,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
         name: tool.name,
         item: `${siteConfig.url}/${tool.id}`,
       },
