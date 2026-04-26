@@ -10,29 +10,24 @@ export function buildToolSchema(toolId: string) {
   if (!tool) return null;
 
   return {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: tool.name,
-    description: tool.longDesc,
-    applicationCategory: 'DeveloperApplication',
-    operatingSystem: 'Any (browser-based)',
-    url: `${siteConfig.url}/${tool.id}`,
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      ratingCount: '1',
-    },
-    publisher: {
-      '@type': 'Organization',
-      name: siteConfig.name,
-      url: siteConfig.url,
-    },
-  };
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: tool.name,
+  description: tool.longDesc,
+  applicationCategory: 'DeveloperApplication',
+  operatingSystem: 'Any (browser-based)',
+  url: `${siteConfig.url}/${tool.id}`,
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'USD',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    url: siteConfig.url,
+  },
+};
 }
 
 /**
