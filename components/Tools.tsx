@@ -9,8 +9,8 @@ import { Panel, CopyButton, Checkbox, Status } from './UI';
 // ============================================
 export function JsonFormatter() {
   const [input, setInput] = useState(
-    '{"name":"DevBench","version":1,"tools":["json","base64","regex"],"active":true}'
-  );
+  '{"name":"DevKit Lab","version":1,"tools":["json","base64","regex"],"active":true}'
+);
   const [indent, setIndent] = useState(2);
 
   const result = useMemo(() => {
@@ -153,7 +153,7 @@ export function UrlEncoder() {
 export function RegexTester() {
   const [pattern, setPattern] = useState('\\b(\\w+)@(\\w+\\.\\w+)\\b');
   const [flags, setFlags] = useState('g');
-  const [testString, setTestString] = useState('Contact claude@anthropic.com or support@example.org for help.');
+  const [testString, setTestString] = useState('Contact hello@devkitlab.dev or support@example.org for help.');
 
   const result = useMemo(() => {
     if (!pattern) return { matches: [] as any[], error: null as string | null, regex: null as RegExp | null };
