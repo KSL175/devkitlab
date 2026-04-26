@@ -105,10 +105,11 @@ export default function TermsPage() {
 
         <h2>Contact</h2>
 
-        <p>
-          Questions about these terms? Reach out via the contact details on our{' '}
-          <a href="/about">About page</a>.
-        </p>
+<p>
+  Questions about these terms? Email us at{' '}
+  <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>{' '}
+  or visit our <a href="/about">About page</a>.
+</p>
       </article>
       <Footer />
     </Shell>

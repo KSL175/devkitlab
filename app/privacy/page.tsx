@@ -132,10 +132,11 @@ export default function PrivacyPage() {
 
         <h2>Contact</h2>
 
-        <p>
-          Questions about privacy on this site? Reach out via the contact details on our{' '}
-          <a href="/about">About page</a>.
-        </p>
+<p>
+  Questions about privacy on this site? Email us at{' '}
+  <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>{' '}
+  or visit our <a href="/about">About page</a>.
+</p>
       </article>
       <Footer />
     </Shell>

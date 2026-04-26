@@ -73,11 +73,12 @@ export default function AboutPage() {
 
         <h2>Feedback</h2>
 
-        <p>
-          If you find a bug, have a tool suggestion, or want to point out where something could
-          be clearer, get in touch. The site is small enough that individual feedback actually
-          shapes what gets built next.
-        </p>
+<p>
+  If you find a bug, have a tool suggestion, or want to point out where something could
+  be clearer, get in touch at{' '}
+  <a href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>.
+  The site is small enough that individual feedback actually shapes what gets built next.
+</p>
       </article>
       <Footer />
     </Shell>

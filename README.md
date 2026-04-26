@@ -1,4 +1,4 @@
-# DevBench
+# DevKit Lab
 
 A fast, private, browser-based collection of ten developer utilities. Built with Next.js 14 (App Router), TypeScript, and zero tracking.
 
@@ -38,7 +38,7 @@ Edit `lib/config.ts`:
 
 ```ts
 export const siteConfig = {
-  name: 'DevBench',                    // your brand name
+  name: 'DevKit Lab',                    // your brand name
   url: 'https://yourdomain.com',       // ← your actual domain
   // ...
 };
@@ -48,7 +48,7 @@ Every sitemap URL, canonical tag, OG tag, and schema URL is derived from this.
 
 ### 2. (Optional) Replace the brand name
 
-If you're forking this under a different name, search for `DevBench` across the project and replace. Main places:
+If you're forking this under a different name, search for `DevKit Lab` across the project and replace. Main places:
 
 - `lib/config.ts` — `siteConfig.name`
 - `components/Shell.tsx` — the sidebar brand text
@@ -91,7 +91,7 @@ After your domain is live:
 ## Project structure
 
 ```
-devbench/
+DevKit Lab/
 ├── app/
 │   ├── layout.tsx              ← Global SEO, fonts, JSON-LD
 │   ├── globals.css             ← All styling

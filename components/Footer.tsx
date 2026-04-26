@@ -12,6 +12,7 @@ export function Footer() {
         <Link href="/about">About</Link>
         <Link href="/privacy">Privacy</Link>
         <Link href="/terms">Terms</Link>
+        <a href={`mailto:${siteConfig.contactEmail}`}>Contact</a>
       </div>
     </footer>
   );

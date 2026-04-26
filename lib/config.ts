@@ -7,6 +7,7 @@ export const siteConfig = {
   url: 'https://devkitlab.dev',
   ogImage: 'https://devkitlab.dev/og.png',
   author: 'DevKit Lab',
+  contactEmail: 'hello@devkitlab.dev',
   twitterHandle: '', // leave empty for now optional
   keywords: [
     'developer tools',
