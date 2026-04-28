@@ -2,37 +2,34 @@ import { siteConfig, TOOLS } from './config';
 
 /**
  * Build SoftwareApplication schema for a specific tool.
- * Tells search engines this page is a free web application,
- * which unlocks richer Google search results.
  */
 export function buildToolSchema(toolId: string) {
   const tool = TOOLS.find((t) => t.id === toolId);
   if (!tool) return null;
 
   return {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: tool.name,
-  description: tool.longDesc,
-  applicationCategory: 'DeveloperApplication',
-  operatingSystem: 'Any (browser-based)',
-  url: `${siteConfig.url}/${tool.id}`,
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-  },
-  publisher: {
-    '@type': 'Organization',
-    name: siteConfig.name,
-    url: siteConfig.url,
-  },
-};
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: tool.name,
+    description: tool.longDesc,
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Any (browser-based)',
+    url: `${siteConfig.url}/${tool.id}`,
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
+  };
 }
 
 /**
- * Build a BreadcrumbList schema for nested pages.
- * Gives Google the crumb trail shown under your search listing.
+ * Build BreadcrumbList schema.
  */
 export function buildBreadcrumbSchema(toolId: string) {
   const tool = TOOLS.find((t) => t.id === toolId);
@@ -59,8 +56,7 @@ export function buildBreadcrumbSchema(toolId: string) {
 }
 
 /**
- * FAQPage schema — the one that gets you expandable FAQ results in Google.
- * Only use it on pages that have visible matching FAQ content.
+ * Build FAQPage schema.
  */
 export function buildFaqSchema(faqs: { question: string; answer: string }[]) {
   return {
@@ -78,13 +74,23 @@ export function buildFaqSchema(faqs: { question: string; answer: string }[]) {
 }
 
 /**
- * Inject schema as JSON-LD via dangerouslySetInnerHTML
+ * Inject schema as JSON-LD. Wraps arrays in @graph for proper validation.
  */
 export function SchemaJsonLd({ schema }: { schema: object | object[] }) {
+  const payload = Array.isArray(schema)
+    ? {
+        '@context': 'https://schema.org',
+        '@graph': schema.map((item: any) => {
+          const { '@context': _, ...rest } = item;
+          return rest;
+        }),
+      }
+    : schema;
+
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(payload) }}
     />
   );
 }
