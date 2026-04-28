@@ -1,0 +1,69 @@
+CHANGES APPLIED TO 9 TOOL PAGE FILES
+=====================================
+
+Two changes were made to each of these files:
+  app/json-formatter/page.tsx
+  app/base64/page.tsx
+  app/url-encoder/page.tsx
+  app/regex-tester/page.tsx
+  app/timestamp-converter/page.tsx
+  app/uuid-generator/page.tsx
+  app/password-generator/page.tsx
+  app/diff-checker/page.tsx
+  app/minifier/page.tsx
+
+----------------------------------------------------------------------
+CHANGE 1 — Added two imports after the existing config import:
+----------------------------------------------------------------------
+
+  import { TOOL_CONTENT } from '@/lib/content';
+  import { buildToolSchema, buildBreadcrumbSchema, buildFaqSchema } from '@/lib/schema';
+
+----------------------------------------------------------------------
+CHANGE 2 — Replaced the Page() function with the @graph JSON-LD pattern:
+----------------------------------------------------------------------
+
+(Example shown for json-formatter — same pattern applied to all 9,
+ with the tool ID and component name matching each file.)
+
+  export default function Page() {
+    const schemas = [
+      buildToolSchema('json-formatter'),
+      buildBreadcrumbSchema('json-formatter'),
+      TOOL_CONTENT['json-formatter']?.faqs ? buildFaqSchema(TOOL_CONTENT['json-formatter'].faqs) : null,
+    ].filter(Boolean);
+
+    const jsonLd = {
+      '@context': 'https://schema.org',
+      '@graph': schemas.map((item: any) => {
+        const { '@context': _, ...rest } = item;
+        return rest;
+      }),
+    };
+
+    return (
+      <>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <ToolPage toolId="json-formatter">
+          <JsonFormatter />
+        </ToolPage>
+      </>
+    );
+  }
+
+----------------------------------------------------------------------
+TOOL ID → COMPONENT NAME MAPPING:
+----------------------------------------------------------------------
+
+  json-formatter       → JsonFormatter
+  base64               → Base64Tool
+  url-encoder          → UrlEncoder
+  regex-tester         → RegexTester
+  timestamp-converter  → TimestampConverter
+  uuid-generator       → UuidGenerator
+  password-generator   → PasswordGenerator
+  diff-checker         → DiffChecker
+  minifier             → Minifier

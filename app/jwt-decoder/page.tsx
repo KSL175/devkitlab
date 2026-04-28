@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ToolPage } from '@/components/ToolPage';
 import { JwtDecoder } from '@/components/Tools';
 import { TOOLS, siteConfig } from '@/lib/config';
+import { buildToolSchema, buildBreadcrumbSchema } from '@/lib/schema';
 
 const tool = TOOLS.find((t) => t.id === 'jwt-decoder')!;
 
@@ -26,9 +27,28 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  const schemas = [
+    buildToolSchema('jwt-decoder'),
+    buildBreadcrumbSchema('jwt-decoder'),
+  ].filter(Boolean);
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': schemas.map((item: any) => {
+      const { '@context': _, ...rest } = item;
+      return rest;
+    }),
+  };
+
   return (
-    <ToolPage toolId="jwt-decoder">
-      <JwtDecoder />
-    </ToolPage>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ToolPage toolId="jwt-decoder">
+        <JwtDecoder />
+      </ToolPage>
+    </>
   );
 }

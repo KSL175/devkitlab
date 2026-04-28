@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ToolPage } from '@/components/ToolPage';
 import { JsonFormatter } from '@/components/Tools';
 import { TOOLS, siteConfig } from '@/lib/config';
+import { buildToolSchema, buildBreadcrumbSchema } from '@/lib/schema';
 
 const tool = TOOLS.find((t) => t.id === 'json-formatter')!;
 
@@ -26,9 +27,28 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+  const schemas = [
+    buildToolSchema('json-formatter'),
+    buildBreadcrumbSchema('json-formatter'),
+  ].filter(Boolean);
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@graph': schemas.map((item: any) => {
+      const { '@context': _, ...rest } = item;
+      return rest;
+    }),
+  };
+
   return (
-    <ToolPage toolId="json-formatter">
-      <JsonFormatter />
-    </ToolPage>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ToolPage toolId="json-formatter">
+        <JsonFormatter />
+      </ToolPage>
+    </>
   );
 }
